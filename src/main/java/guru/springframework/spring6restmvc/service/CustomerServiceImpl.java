@@ -1,8 +1,10 @@
 package guru.springframework.spring6restmvc.service;
 
+import guru.springframework.spring6restmvc.model.Beer;
 import guru.springframework.spring6restmvc.model.Customer;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -52,5 +54,47 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getCustomerById(UUID id) {
         return customers.get(id);
+    }
+
+    @Override
+    public Customer saveNewCustomer(Customer customer) {
+        Customer savedCustomer = Customer.builder()
+                .id(UUID.randomUUID())
+                .createdDate(LocalDateTime.now())
+                .lastModifiedDate(LocalDateTime.now())
+                .version(customer.getVersion())
+                .customerName(customer.getCustomerName())
+                .build();
+
+        customers.put(savedCustomer.getId(), savedCustomer);
+
+        return savedCustomer;
+    }
+
+    @Override
+    public void updateCustomerById(UUID customerId, Customer customer) {
+        Customer existing = customers.get(customerId);
+        existing.setCustomerName(customer.getCustomerName());
+        existing.setVersion(customer.getVersion());
+
+        customers.put(existing.getId(), existing);
+    }
+
+    @Override
+    public void deleteById(UUID customerId) {
+        customers.remove(customerId);
+    }
+
+    @Override
+    public void patchCustomerById(UUID customerId, Customer customer) {
+        Customer existing = customers.get(customerId);
+
+        if(StringUtils.hasText(customer.getCustomerName())){
+            existing.setCustomerName(customer.getCustomerName());
+        }
+
+        if(customer.getVersion() != null){
+            existing.setVersion(customer.getVersion());
+        }
     }
 }
