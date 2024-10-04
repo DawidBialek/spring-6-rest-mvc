@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getCustomers() {
+    public List<CustomerDTO> listCustomers() {
         return new ArrayList<>(customers.values());
     }
 
@@ -70,21 +70,24 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomerById(UUID customerId, CustomerDTO customer) {
+    public Optional<CustomerDTO> updateCustomerById(UUID customerId, CustomerDTO customer) {
         CustomerDTO existing = customers.get(customerId);
         existing.setCustomerName(customer.getCustomerName());
         existing.setVersion(customer.getVersion());
 
         customers.put(existing.getId(), existing);
+
+        return Optional.of(existing);
     }
 
     @Override
-    public void deleteById(UUID customerId) {
+    public Boolean deleteById(UUID customerId) {
         customers.remove(customerId);
+        return true;
     }
 
     @Override
-    public void patchCustomerById(UUID customerId, CustomerDTO customer) {
+    public Optional<CustomerDTO> patchCustomerById(UUID customerId, CustomerDTO customer) {
         CustomerDTO existing = customers.get(customerId);
 
         if(StringUtils.hasText(customer.getCustomerName())){
@@ -94,5 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
         if(customer.getVersion() != null){
             existing.setVersion(customer.getVersion());
         }
+
+        return Optional.of(existing);
     }
 }
