@@ -2,7 +2,7 @@ package guru.springframework.spring6restmvc.controller;
 
 import guru.springframework.spring6restmvc.model.CustomerDTO;
 import guru.springframework.spring6restmvc.services.CustomerService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 public class CustomerController {
     public static final String CUSTOMER_PATH = "/api/v1/customer";
@@ -44,7 +44,6 @@ public class CustomerController {
         if (customerService.updateCustomerById(customerId, customer).isEmpty()) {
             throw new NotFoundException();
         }
-        ;
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
