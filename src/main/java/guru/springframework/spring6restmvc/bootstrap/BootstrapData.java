@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -108,7 +109,7 @@ public class BootstrapData implements CommandLineRunner {
 
     ;
 
-    public void setupCustomerRepository() {
+    private void setupCustomerRepository() {
         if (customerRepository.count() == 0) {
             Customer customer1 = Customer.builder()
                     .customerName("Albert")
@@ -130,5 +131,37 @@ public class BootstrapData implements CommandLineRunner {
 
             customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3));
         }
+    }
+
+    private void loadCustomerData() {
+
+        if (customerRepository.count() == 0) {
+            Customer customer1 = Customer.builder()
+                    .id(UUID.randomUUID())
+                    .customerName("Customer 1")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build();
+
+            Customer customer2 = Customer.builder()
+                    .id(UUID.randomUUID())
+                    .customerName("Customer 2")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build();
+
+            Customer customer3 = Customer.builder()
+                    .id(UUID.randomUUID())
+                    .customerName("Customer 3")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build();
+
+            customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3));
+        }
+
     }
 }
