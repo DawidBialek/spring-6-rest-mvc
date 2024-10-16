@@ -112,21 +112,21 @@ public class BootstrapData implements CommandLineRunner {
     private void setupCustomerRepository() {
         if (customerRepository.count() == 0) {
             Customer customer1 = Customer.builder()
-                    .customerName("Albert")
+                    .name("Albert")
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             Customer customer2 = Customer.builder()
-                    .customerName("Felix")
+                    .name("Felix")
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             Customer customer3 = Customer.builder()
-                    .customerName("Wilson")
+                    .name("Wilson")
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3));
@@ -138,26 +138,26 @@ public class BootstrapData implements CommandLineRunner {
         if (customerRepository.count() == 0) {
             Customer customer1 = Customer.builder()
                     .id(UUID.randomUUID())
-                    .customerName("Customer 1")
+                    .name("Customer 1")
                     .version(1)
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             Customer customer2 = Customer.builder()
                     .id(UUID.randomUUID())
-                    .customerName("Customer 2")
+                    .name("Customer 2")
                     .version(1)
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             Customer customer3 = Customer.builder()
                     .id(UUID.randomUUID())
-                    .customerName("Customer 3")
+                    .name("Customer 3")
                     .version(1)
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             customerRepository.saveAll(Arrays.asList(customer1, customer2, customer3));

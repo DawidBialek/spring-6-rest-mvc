@@ -71,7 +71,7 @@ class CustomerControllerIT {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
 
         Customer updatedCustomer = customerRepository.findById(customer.getId()).get();
-        assertThat(updatedCustomer.getCustomerName()).isEqualTo(customerName);
+        assertThat(updatedCustomer.getName()).isEqualTo(customerName);
     }
 
     @Rollback
