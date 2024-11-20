@@ -53,7 +53,7 @@ class BeerControllerTest {
     BeerServiceImpl beerServiceImpl;
 
     public static final String USERNAME = "user1";
-    public static final String PASSWORD = "PASSWORD";
+    public static final String PASSWORD = "password";
 
     @BeforeEach
     void setUp() {
