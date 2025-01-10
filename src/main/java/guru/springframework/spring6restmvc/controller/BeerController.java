@@ -49,7 +49,6 @@ public class BeerController {
         if (beerService.updateBeerById(beerId, beer).isEmpty()) {
             throw new NotFoundException();
         }
-        ;
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
